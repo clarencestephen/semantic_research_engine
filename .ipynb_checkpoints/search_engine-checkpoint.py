@@ -8,10 +8,6 @@ from langchain_openai import ChatOpenAI
 from literalai import LiteralClient
 from dotenv import load_dotenv
 
-#OMP: Error #15
-import os
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-
 load_dotenv()
 
 client = LiteralClient()
@@ -38,7 +34,7 @@ async def retrieve_docs():
         arxiv_query = query['output']
 
         # ARXIV DOCS PORTION
-        arxiv_docs = ArxivLoader(query=arxiv_query, load_max_docs=3).load()
+        arxiv_docs = ArxivLoader(query=arxiv_query, load_max_docs=1).load()
         # Prepare arXiv results for display
         arxiv_papers = [
             f"Published: {doc.metadata['Published']} \n Title: {doc.metadata['Title']} \n Authors: {doc.metadata['Authors']} \n Summary: {doc.metadata['Summary'][:50]}... \n---\n"
